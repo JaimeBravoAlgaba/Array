@@ -54,6 +54,12 @@ class Array
             for(size_t i=0; i<S; ++i)
                 m_Data[i] = other[i];
         };
+        
+        Array(const T* v)
+        {       
+            for(size_t i=0; i<S; ++i)
+                m_Data[i] = v[i];
+        };
 
         // Initializer list constructor.
         Array(const initializer_list<T> array)
