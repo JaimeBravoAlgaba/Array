@@ -8,6 +8,7 @@ template <typename T>
 class ArrayIterator
 {
     // Tags
+    
     using iterator_category = bidirectional_iterator_tag;
     using difference_type = size_t;
     using value_type = T;
