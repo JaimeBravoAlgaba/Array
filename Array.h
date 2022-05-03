@@ -83,9 +83,9 @@ class Array
         // Const reference by index
         const T& operator[](const size_t index) const { return m_Data[index]; }
 
-        // Data pointer
+        // Data pointer getter
         T* Data(){ return m_Data; }
-        // Const data pointer
+        // Const data pointer getter
         const T* Data() const { return m_Data; }
 
         // Iterator begin
@@ -96,5 +96,15 @@ class Array
     private:
         T m_Data[S];
 };
+
+template <typename T, size_t S>
+ostream& operator<<(ostream& stream, Array<T, S> array)
+{
+    size_t i;
+    for(i=0; i<S-1; ++i)
+        stream << array[i] << ",";
+        
+    return stream << array[i];
+}
 
 #endif
