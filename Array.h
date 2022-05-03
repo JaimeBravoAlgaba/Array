@@ -8,12 +8,18 @@ class Array
         // Default constructor.
         Array() { };
 
+        // Copy constructor.
+        Array(const Array<T, S>& other)
+        {
+            for(size_t i=0; i<S; ++i)
+                m_Data[i] = other[i];
+        };
+
         // Initializer list constructor.
         Array(const initializer_list<T> array)
         {
-            if(S != array.size()){
+            if(S != array.size())
                 __throw_length_error("Array's length differs from expected.");
-            }
             else
                 for(size_t i=0; i<array.size(); ++i)
                     m_Data[i] = array.begin()[i];
@@ -31,7 +37,7 @@ class Array
         T* Data(){ return m_Data; }
         // Const data pointer
         const T* Data() const { return m_Data; }
-        
+
     private:
         T m_Data[S];
 };
