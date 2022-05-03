@@ -7,7 +7,7 @@ using namespace std;
 template <typename T>
 class ArrayIterator
 {
-    // Tags:
+    // Tags
     using iterator_category = bidirectional_iterator_tag;
     using difference_type = size_t;
     using value_type = T;
@@ -15,12 +15,12 @@ class ArrayIterator
     using reference = T&;
 
     public:
-        // Constructor.
+        // Constructor
         ArrayIterator(pointer ptr) : m_Pointer(ptr) { }
 
-        // Reference operator.
+        // Reference operator
         reference operator*()  const { return *m_Pointer; }
-        // Pointer operator.
+        // Pointer operator
         pointer   operator->() const { return  m_Pointer; }
 
         // Pre-Increment operator.
