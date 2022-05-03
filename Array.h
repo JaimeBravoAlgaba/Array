@@ -1,3 +1,6 @@
+#ifndef __ARRAY_
+#define __ARRAY_
+
 #include <initializer_list>
 using namespace std;
 
@@ -92,3 +95,5 @@ class Array
     private:
         T m_Data[S];
 };
+
+#endif
