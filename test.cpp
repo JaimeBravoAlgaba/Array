@@ -6,21 +6,19 @@ using namespace std;
 
 int main()
 {
-    Array<string, 3> array = {"Hola", "Hello", "Hallo"};
-    Array<string, 3> array2 = array;
-    //array = {"Hola", "Hello", "Hallo"};
+    Array<int, 3> array = {1, 2, 3};
+    Array<int, 3> array2 = array;
 
-    array2[2]="Bonjour";
+    swap(array[0], array[1]);
 
-    for(size_t i=0; i<array.Size(); ++i)
-        cout << array[i] << endl;
+    cout << "First array:" << endl;
+    for(auto item : array)
+        cout << item << endl;
 
-    cout << endl;
+    cout << endl << "Second array:" << endl;
 
-    for(size_t i=0; i<array2.Size(); ++i)
-        cout << array2[i] << endl;
-    
-    cout << array2.Size();
+    for(auto item : array2)
+        cout << item << endl;
 
     return 0;
 }

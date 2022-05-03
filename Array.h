@@ -1,6 +1,46 @@
 #include <initializer_list>
 using namespace std;
 
+template <typename T>
+class ArrayIterator
+{
+    // Tags:
+    using iterator_category = bidirectional_iterator_tag;
+    using difference_type = size_t;
+    using value_type = T;
+    using pointer = T*;
+    using reference = T&;
+
+    public:
+        // Constructor.
+        ArrayIterator(pointer ptr) : m_Pointer(ptr) { }
+
+        // Reference operator.
+        reference operator*()  const { return *m_Pointer; }
+        // Pointer operator.
+        pointer   operator->() const { return  m_Pointer; }
+
+        // Pre-Increment operator.
+        ArrayIterator& operator++()    { ++m_Pointer; return *this; }
+        // Post-Increment operator.
+        ArrayIterator  operator++(int) { ArrayIterator tmp = *this; ++(*this); return  tmp; }
+
+        // Pre-Decrement operator.
+        ArrayIterator& operator--()    { --m_Pointer; return *this; }
+        // Post-Decrement operator.
+        ArrayIterator  operator--(int) { ArrayIterator tmp = *this; --(*this); return  tmp; }
+        
+        // Equality comparison operator.
+        friend bool operator==(const ArrayIterator& a, const ArrayIterator& b)
+        { return a.m_Pointer == b.m_Pointer; };
+        // Inequality comparison operator.
+        friend bool operator!=(const ArrayIterator& a, const ArrayIterator& b)
+        { return a.m_Pointer != b.m_Pointer; };
+
+    private:
+        pointer m_Pointer;
+};
+
 template <typename T, size_t S>
 class Array
 {
@@ -37,6 +77,11 @@ class Array
         T* Data(){ return m_Data; }
         // Const data pointer
         const T* Data() const { return m_Data; }
+
+        // Iterator begin
+        ArrayIterator<T> begin() { return ArrayIterator<T>(&m_Data[0]);}
+        // Iterator end
+        ArrayIterator<T> end() { return ArrayIterator<T>(&m_Data[S]);} // S position is out of bounds!
 
     private:
         T m_Data[S];
