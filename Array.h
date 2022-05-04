@@ -76,12 +76,8 @@ class Array
         Array(const initializer_list<T>& array)
         {
             m_Data = new T[S];            
-            size_t i = 0;
-            for(auto item : array)
-            {
-                m_Data[i] = item;
-                i++;
-            }
+            for(size_t i = 0; i<S; ++i)
+                m_Data[i] = array.begin()[i];
         }
 
         ~Array()
@@ -97,19 +93,9 @@ class Array
         // Const reference by index
         const T& operator[](const size_t index) const { return m_Data[index]; }
 
-        // Assignation
+        // Assignation by reference
         Array<T,S>& operator=(const Array<T,S>& other)
         {
-            for(size_t i=0; i<S; ++i)
-                m_Data[i] = other[i];
-            
-            return *this;
-        }
-        
-        // Const Assignation
-        const Array<T,S>& operator=(const Array<T,S>& other)
-        {
-            cout << "Assignation" << endl;
             for(size_t i=0; i<S; ++i)
                 m_Data[i] = other[i];
             
