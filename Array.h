@@ -57,6 +57,7 @@ class Array
         Array(const Array<T, S>& other)
         {
             //cout << "Copy!" << endl;
+            //memcpy(m_Data, other.m_Data, S * sizeof(T));
             *this = move(other);
         }
         
@@ -71,11 +72,6 @@ class Array
         Array(const initializer_list<T>& array)
         {
             memcpy(m_Data, array.begin(), S * sizeof(T));
-        }
-
-        ~Array()
-        {
-            delete[] m_Data;
         }
 
         // Returns the number of elements in the array.
