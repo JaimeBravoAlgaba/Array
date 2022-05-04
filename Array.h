@@ -2,6 +2,7 @@
 #define __ARRAY_
 
 #include <initializer_list>
+#include <cstring>
 using namespace std;
 
 template <typename T>
@@ -55,24 +56,18 @@ class Array
         // Copy constructor.
         Array(const Array<T, S>& other)
         {
-            for(size_t i=0; i<S; ++i)
-                m_Data[i] = other[i];
+            *this = move(other);
         }
         
         Array(const T* v)
         {    
-            for(size_t i=0; i<S; ++i)
-                m_Data[i] = v[i];
+            memcpy(m_Data, v, S * sizeof(T));
         }
 
         // Initializer list constructor.
         Array(const initializer_list<T>& array)
         {
-            if(S != array.size())
-                __throw_length_error("Array's length differs from expected.");
-            else
-                for(size_t i=0; i<array.size(); ++i)
-                    m_Data[i] = array.begin()[i];
+            memcpy(m_Data, array.begin(), S * sizeof(T));
         }
 
          //Returns the number of elements in the array.
