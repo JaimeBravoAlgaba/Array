@@ -56,7 +56,7 @@ class Array
         // Copy constructor.
         Array(const Array<T, S>& other)
         {
-            cout << "Copy!" << endl;
+            //cout << "Copy!" << endl;
             *this = move(other);
         }
         
@@ -132,6 +132,16 @@ ostream& operator<<(ostream& stream, const Array<T, S>& array)
         stream << array[i] << ",";
         
     return stream << array[i];
+}
+
+template <size_t S>
+ostream& operator<<(ostream& stream, const Array<char, S>& array)
+{
+    size_t i;
+    for(i=0; i<S; ++i)
+        stream << array[i];
+        
+    return stream;
 }
 
 #endif
