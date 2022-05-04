@@ -56,6 +56,7 @@ class Array
         // Copy constructor.
         Array(const Array<T, S>& other)
         {
+            //cout << "Copy!" << endl;
             *this = move(other);
         }
         
@@ -90,15 +91,13 @@ class Array
         // Iterator end
         ArrayIterator<T> end() { return ArrayIterator<T>(&m_Data[S]);} // S position is out of bounds!
         
-        constexpr T dotProduct(const Array<T, S>& a);
-
     private:
         T m_Data[S];
 };
 
 
 template <typename T, size_t S>
-ostream& operator<<(ostream& stream, Array<T, S> array)
+ostream& operator<<(ostream& stream, const Array<T, S>& array)
 {
     size_t i;
     for(i=0; i<S-1; ++i)
