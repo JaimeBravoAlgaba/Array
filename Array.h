@@ -125,10 +125,9 @@ const Array<string,S> operator-(const Array<string,S>& a, const Array<string,S>&
 
 // Scalar product operator
 template <typename T, size_t S>
-T operator*(const Array<T,S>& a, const Array<T,S>& b)
+const T operator*(const Array<T,S>& a, const Array<T,S>& b)
 {
     T c = 0;
-
     for(size_t i=0; i<S; ++i)
         c += a[i] * b[i];
 
@@ -137,10 +136,10 @@ T operator*(const Array<T,S>& a, const Array<T,S>& b)
 
 // Scalar product exceptions
 template <size_t S>
-char operator*(const Array<char,S>& a, const Array<char,S>& b) = delete;
+const char operator*(const Array<char,S>& a, const Array<char,S>& b) = delete;
 
 template <size_t S>
-string operator*(const Array<string,S>& a, const Array<string,S>& b) = delete;
+const string operator*(const Array<string,S>& a, const Array<string,S>& b) = delete;
 
 // Ostream operator
 template <typename T, size_t S>
