@@ -57,16 +57,16 @@ class Array
         {
             for(size_t i=0; i<S; ++i)
                 m_Data[i] = other[i];
-        };
+        }
         
         Array(const T* v)
-        {       
+        {    
             for(size_t i=0; i<S; ++i)
                 m_Data[i] = v[i];
-        };
+        }
 
         // Initializer list constructor.
-        Array(const initializer_list<T> array)
+        Array(const initializer_list<T>& array)
         {
             if(S != array.size())
                 __throw_length_error("Array's length differs from expected.");
@@ -92,10 +92,13 @@ class Array
         ArrayIterator<T> begin() { return ArrayIterator<T>(&m_Data[0]);}
         // Iterator end
         ArrayIterator<T> end() { return ArrayIterator<T>(&m_Data[S]);} // S position is out of bounds!
+        
+        constexpr T dotProduct(const Array<T, S>& a);
 
     private:
         T m_Data[S];
 };
+
 
 template <typename T, size_t S>
 ostream& operator<<(ostream& stream, Array<T, S> array)
