@@ -73,6 +73,11 @@ class Array
             memcpy(m_Data, array.begin(), S * sizeof(T));
         }
 
+        ~Array()
+        {
+            delete[] m_Data;
+        }
+
         // Returns the number of elements in the array.
         constexpr size_t Size() const { return S; }
 
