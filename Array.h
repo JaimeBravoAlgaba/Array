@@ -59,9 +59,11 @@ class Array
             *this = move(other);
         }
         
+        // Vector constructor.
         Array(const T* v)
-        {    
-            memcpy(m_Data, v, S * sizeof(T));
+        {   
+            for(size_t i=0; i<S; ++i)
+                m_Data[i] = v[i];
         }
 
         // Initializer list constructor.
@@ -70,7 +72,7 @@ class Array
             memcpy(m_Data, array.begin(), S * sizeof(T));
         }
 
-         //Returns the number of elements in the array.
+        // Returns the number of elements in the array.
         constexpr size_t Size() const { return S; }
 
         // Reference by index
