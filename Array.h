@@ -37,10 +37,10 @@ class ArrayIterator
         
         // Equality comparison operator.
         friend bool operator==(const ArrayIterator& a, const ArrayIterator& b)
-        { return a.m_Pointer == b.m_Pointer; };
+        { return a.m_Pointer == b.m_Pointer; }
         // Inequality comparison operator.
         friend bool operator!=(const ArrayIterator& a, const ArrayIterator& b)
-        { return a.m_Pointer != b.m_Pointer; };
+        { return a.m_Pointer != b.m_Pointer; }
 
     private:
         pointer m_Pointer;
@@ -161,6 +161,20 @@ const char operator*(const Array<char,S>& a, const Array<char,S>& b) = delete;
 
 template <size_t S>
 const string operator*(const Array<string,S>& a, const Array<string,S>& b) = delete;
+
+// Constant times array operator
+template <typename Tk,  typename T, size_t S>
+Array<T,S> operator*(Tk k, Array<T,S> a)
+{
+    for(size_t i=0; i<S; ++i)
+        a[i] = (T)k * a[i];
+
+    return a;
+}
+
+// Array times constant operator
+template <typename T,  size_t S, typename Tk>
+Array<T,S> operator*(Array<T,S>& a, Tk k) { return (k*a); }
 
 // Ostream operator
 template <typename T, size_t S>
