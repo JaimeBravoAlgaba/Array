@@ -51,19 +51,23 @@ class Array
 {
     public:
         // Default constructor.
-        Array() { };
+        Array()
+        { 
+            m_Data = new T[S];
+        }
 
         // Copy constructor.
         Array(const Array<T, S>& other)
         {
-            //cout << "Copy!" << endl;
-            //memcpy(m_Data, other.m_Data, S * sizeof(T));
-            *this = move(other);
+            m_Data = new T[S];
+            for(size_t i=0; i<S; ++i)
+                m_Data[i] = other[i];
         }
         
         // Vector constructor.
         Array(const T* v)
         {   
+            m_Data = new T[S];
             for(size_t i=0; i<S; ++i)
                 m_Data[i] = v[i];
         }
@@ -71,7 +75,18 @@ class Array
         // Initializer list constructor.
         Array(const initializer_list<T>& array)
         {
-            memcpy(m_Data, array.begin(), S * sizeof(T));
+            m_Data = new T[S];            
+            size_t i = 0;
+            for(auto item : array)
+            {
+                m_Data[i] = item;
+                i++;
+            }
+        }
+
+        ~Array()
+        {
+            delete[] m_Data;
         }
 
         // Returns the number of elements in the array.
@@ -81,6 +96,25 @@ class Array
         T& operator[](const size_t index) { return m_Data[index]; }
         // Const reference by index
         const T& operator[](const size_t index) const { return m_Data[index]; }
+
+        // Assignation
+        Array<T,S>& operator=(const Array<T,S>& other)
+        {
+            for(size_t i=0; i<S; ++i)
+                m_Data[i] = other[i];
+            
+            return *this;
+        }
+        
+        // Const Assignation
+        const Array<T,S>& operator=(const Array<T,S>& other)
+        {
+            cout << "Assignation" << endl;
+            for(size_t i=0; i<S; ++i)
+                m_Data[i] = other[i];
+            
+            return *this;
+        }
 
         // Data pointer getter
         T* Data(){ return m_Data; }
@@ -93,7 +127,7 @@ class Array
         ArrayIterator<T> end() { return ArrayIterator<T>(&m_Data[S]);} // S position is out of bounds!
         
     private:
-        T m_Data[S];
+        T* m_Data;
 };
 
 // Addition operator
@@ -147,10 +181,11 @@ template <typename T, size_t S>
 ostream& operator<<(ostream& stream, const Array<T, S>& array)
 {
     size_t i;
+    stream << "{";
     for(i=0; i<S-1; ++i)
         stream << array[i] << ",";
         
-    return stream << array[i];
+    return stream << array[i] << "}";
 }
 
 // Ostream operator char specialization
