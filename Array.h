@@ -56,7 +56,7 @@ class Array
         // Copy constructor.
         Array(const Array<T, S>& other)
         {
-            //cout << "Copy!" << endl;
+            cout << "Copy!" << endl;
             *this = move(other);
         }
         
@@ -95,7 +95,35 @@ class Array
         T m_Data[S];
 };
 
+// Addition operator
+template <typename T, size_t S>
+const Array<T,S> operator+(const Array<T,S>& a, const Array<T,S>& b)
+{
+    Array<T,S> c;
 
+    for(size_t i=0; i<S; ++i)
+        c[i] = a[i] + b[i];
+
+    return c;
+}
+
+// Substraction operator
+template <typename T, size_t S>
+const Array<T,S> operator-(const Array<T,S>& a, const Array<T,S>& b)
+{
+    Array<T,S> c;
+
+    for(size_t i=0; i<S; ++i)
+        c[i] = a[i] - b[i];
+
+    return c;
+}
+
+template <size_t S>
+const Array<string,S> operator-(const Array<string,S>& a, const Array<string,S>& b) = delete;
+
+
+// Ostream operator
 template <typename T, size_t S>
 ostream& operator<<(ostream& stream, const Array<T, S>& array)
 {
