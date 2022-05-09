@@ -117,66 +117,6 @@ class Array
         T* m_Data;
 };
 
-// Addition operator
-template <typename T, size_t S>
-const Array<T,S> operator+(const Array<T,S>& a, const Array<T,S>& b)
-{
-    Array<T,S> c;
-
-    for(size_t i=0; i<S; ++i)
-        c[i] = a[i] + b[i];
-
-    return c;
-}
-
-// Substraction operator
-template <typename T, size_t S>
-const Array<T,S> operator-(const Array<T,S>& a, const Array<T,S>& b)
-{
-    Array<T,S> c;
-
-    for(size_t i=0; i<S; ++i)
-        c[i] = a[i] - b[i];
-
-    return c;
-}
-
-// Substraction operator string specialization
-template <size_t S>
-const Array<string,S> operator-(const Array<string,S>& a, const Array<string,S>& b) = delete;
-
-// Scalar product operator
-template <typename T, size_t S>
-const T operator*(const Array<T,S>& a, const Array<T,S>& b)
-{
-    T c = 0;
-    for(size_t i=0; i<S; ++i)
-        c += a[i] * b[i];
-
-    return c;
-}
-
-// Scalar product exceptions
-template <size_t S>
-const char operator*(const Array<char,S>& a, const Array<char,S>& b) = delete;
-
-template <size_t S>
-const string operator*(const Array<string,S>& a, const Array<string,S>& b) = delete;
-
-// Constant times array operator
-template <typename Tk,  typename T, size_t S>
-Array<T,S> operator*(Tk k, Array<T,S> a)
-{
-    for(size_t i=0; i<S; ++i)
-        a[i] = (T)k * a[i];
-
-    return a;
-}
-
-// Array times constant operator
-template <typename T,  size_t S, typename Tk>
-Array<T,S> operator*(Array<T,S>& a, Tk k) { return (k*a); }
-
 // Ostream operator
 template <typename T, size_t S>
 ostream& operator<<(ostream& stream, const Array<T, S>& array)
