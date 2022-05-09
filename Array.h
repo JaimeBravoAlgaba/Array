@@ -124,7 +124,7 @@ ostream& operator<<(ostream& stream, const Array<T, S>& array)
     size_t i;
     stream << "{";
     for(i=0; i<S-1; ++i)
-        stream << array[i] << ",";
+        stream << array[i] << ", ";
         
     return stream << array[i] << "}";
 }
